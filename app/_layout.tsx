@@ -19,6 +19,7 @@ import RootStorageProvider from '@/src/routing/RootStorageProvider';
 import { useState } from 'react';
 import { useMount, useUpdate } from '@lilib/hooks';
 import theme from '@/src/utils/theme';
+import ProtectedRoutesProvider from '@/src/routing/ProtectedRoutesProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -74,16 +75,18 @@ function RootLayoutNav() {
   return (
     <RootStorageProvider>
       <NativeBaseProvider theme={theme}>
-        <Stack>
-          <Stack.Screen
-            name="(tabs)"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="modal"
-            options={{ presentation: 'modal' }}
-          />
-        </Stack>
+        <ProtectedRoutesProvider>
+          <Stack>
+            <Stack.Screen
+              name="(tabs)"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="modal"
+              options={{ presentation: 'modal' }}
+            />
+          </Stack>
+        </ProtectedRoutesProvider>
       </NativeBaseProvider>
     </RootStorageProvider>
   );
