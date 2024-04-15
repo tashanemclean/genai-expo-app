@@ -1,0 +1,10 @@
+expo
+.github
+.idea
+assets
+coverage
+node_modules
+*.node_modules
+build/**/*
+coverage/**/*
+dist/**/*

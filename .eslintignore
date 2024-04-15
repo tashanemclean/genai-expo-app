@@ -1,0 +1,9 @@
+.expo
+.github
+.idea
+assets
+node_modules
+*.md
+plugins
+build
+dist

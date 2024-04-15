@@ -1,11 +1,24 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+import { AbrilFatface_400Regular } from '@expo-google-fonts/abril-fatface';
+import {
+  Montserrat_100Thin,
+  Montserrat_100Thin_Italic,
+  Montserrat_200ExtraLight,
+  Montserrat_200ExtraLight_Italic,
+  Montserrat_300Light,
+  Montserrat_300Light_Italic,
+  Montserrat_700Bold,
+  Montserrat_700Bold_Italic,
+} from '@expo-google-fonts/montserrat';
+import * as Font from 'expo-font';
+import { NativeBaseProvider } from 'native-base';
+
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
 
-import { useColorScheme } from '@/components/useColorScheme';
+import RootStorageProvider from '@/src/routing/RootStorageProvider';
+import { useState } from 'react';
+import { useMount, useUpdate } from '@lilib/hooks';
+import theme from '@/src/utils/theme';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -21,38 +34,57 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
+  const [isReady, setIsReady] = useState(false);
+
+  useMount(() => {
+    (async () => {
+      try {
+        // Load Fonts
+        // Abril
+        await Font.loadAsync({ AbrilFatface_400Regular });
+        // Montserrat
+        await Font.loadAsync({
+          Montserrat_100Thin,
+          Montserrat_100ThinItalic: Montserrat_100Thin_Italic,
+          Montserrat_200ExtraLight,
+          Montserrat_200ExtraLightItalic: Montserrat_200ExtraLight_Italic,
+          Montserrat_300Light,
+          Montserrat_300LightItalic: Montserrat_300Light_Italic,
+          Montserrat_700Bold,
+          Montserrat_700Bold_Italic,
+        });
+      } finally {
+        setIsReady(true);
+      }
+    })();
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
+  useUpdate(() => {
+    (async () => {
+      if (!isReady) return;
+      await SplashScreen.hideAsync();
+    })();
+  }, [isReady]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+  if (!isReady) return null;
   return <RootLayoutNav />;
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <RootStorageProvider>
+      <NativeBaseProvider theme={theme}>
+        <Stack>
+          <Stack.Screen
+            name="(tabs)"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="modal"
+            options={{ presentation: 'modal' }}
+          />
+        </Stack>
+      </NativeBaseProvider>
+    </RootStorageProvider>
   );
 }
