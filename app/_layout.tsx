@@ -79,12 +79,12 @@ function RootLayoutNav() {
         <ProtectedRoutesProvider>
           <Stack>
             <Stack.Screen
-              name="(tabs)"
+              name="(auth)"
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="modal"
-              options={{ presentation: 'modal' }}
+              name="(tabs)"
+              options={{ headerShown: false }}
             />
           </Stack>
         </ProtectedRoutesProvider>
