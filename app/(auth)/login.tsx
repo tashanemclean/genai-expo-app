@@ -1,4 +1,4 @@
-import Login from '@/src/screens/auth/Login';
+import Login from '../../src/screens/auth/Login';
 
 const LoginRoute = () => <Login />;
 

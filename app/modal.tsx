@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
+import { Text } from 'react-native';
+import { View } from 'react-native';
 import { Platform, StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/src/EditScreenInfo';
-import { Text, View } from '@/src/Themed';
+import EditScreenInfo from '../src/EditScreenInfo';
 
 export default function ModalScreen() {
   return (
@@ -10,8 +10,6 @@ export default function ModalScreen() {
       <Text style={styles.title}>Modal</Text>
       <View
         style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
       />
       <EditScreenInfo path="app/modal.tsx" />
 

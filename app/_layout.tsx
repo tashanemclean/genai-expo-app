@@ -15,11 +15,12 @@ import { NativeBaseProvider } from 'native-base';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 
-import RootStorageProvider from '@/src/routing/RootStorageProvider';
+
 import { useState } from 'react';
 import { useMount, useUpdate } from '@lilib/hooks';
-import theme from '@/src/utils/theme';
-import ProtectedRoutesProvider from '@/src/routing/ProtectedRoutesProvider';
+import RootStorageProvider from '../src/routing/RootStorageProvider';
+import theme from '../src/utils/theme';
+import ProtectedRoutesProvider from '../src/routing/ProtectedRoutesProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
