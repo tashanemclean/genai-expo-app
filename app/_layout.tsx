@@ -10,7 +10,7 @@ import {
   Montserrat_700Bold_Italic,
 } from '@expo-google-fonts/montserrat';
 import * as Font from 'expo-font';
-import { NativeBaseProvider } from 'native-base';
+import { GluestackUIProvider } from "@gluestack-ui/themed"
 
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -19,7 +19,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useState } from 'react';
 import { useMount, useUpdate } from '@lilib/hooks';
 import RootStorageProvider from '../src/routing/RootStorageProvider';
-import theme from '../src/utils/theme';
+
 import ProtectedRoutesProvider from '../src/routing/ProtectedRoutesProvider';
 
 export {
@@ -75,7 +75,7 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <RootStorageProvider>
-      <NativeBaseProvider theme={theme}>
+      <GluestackUIProvider>
         <ProtectedRoutesProvider>
           <Stack>
             <Stack.Screen
@@ -88,7 +88,7 @@ function RootLayoutNav() {
             />
           </Stack>
         </ProtectedRoutesProvider>
-      </NativeBaseProvider>
+      </GluestackUIProvider>
     </RootStorageProvider>
   );
 }

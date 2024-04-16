@@ -1,4 +1,5 @@
-import { HStack } from 'native-base';
+import { HStack } from "@gluestack-ui/themed";
+
 
 const Login = () => {
   return (
