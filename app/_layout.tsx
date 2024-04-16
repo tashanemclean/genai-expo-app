@@ -15,7 +15,6 @@ import { GluestackUIProvider } from "@gluestack-ui/themed"
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 
-
 import { useState } from 'react';
 import { useMount, useUpdate } from '@lilib/hooks';
 import RootStorageProvider from '../src/routing/RootStorageProvider';

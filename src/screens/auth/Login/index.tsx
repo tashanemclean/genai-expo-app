@@ -1,12 +1,12 @@
 import { HStack } from "@gluestack-ui/themed";
 
 
-const Login = () => {
+const LoginScreen = () => {
   return (
     <>
-      <HStack>Get Started</HStack>
+      <HStack>Login</HStack>
     </>
   );
 };
 
-export default Login;
+export default LoginScreen;
